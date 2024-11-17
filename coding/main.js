@@ -11,7 +11,7 @@ const addLighting = (scene) => {
 const loadAndConfigureModel = async (fileloc) => {
     const gltf = await loadGLTF(fileloc);
     gltf.scene.scale.set(0.1, 0.1, 0.1);
-    gltf.scene.position.set(0, -0.4, 0);
+    gltf.scene.position.set(0,-0.4,0);
 
     return gltf;
 };
@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
             imageTargetSrc: "../assets/target/QRBig2.mind"
         });
     };
+    
+   
 
     // Main function to start the AR experience
     const start = async () => {
@@ -106,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //overrides instead of plane of object, it is on display device plane
         //more stable projection
         const cam = gltf.cameras.length > 0 ? gltf.cameras[0] : mindarThree.camera;
+         cam.position.set(cam.position.x,cam.position.y+4,cam.position.z);
 
         let prevX = 0;
         let prevY = 0;
@@ -163,7 +166,34 @@ document.addEventListener("DOMContentLoaded", () => {
         await mindarThree.start();
         startRenderingLoop(renderer, scene, cam, mixer, gltf);
     };
+    
+     // For static BG
+    //issue double scanner UI
+    const start2 = async () => {
+        const mindarThree = initializeMindAR();
+
+        const { renderer, scene, camera } = mindarThree;
+        
+
+        addLighting(scene);
+
+        const gltf = await loadAndConfigureModel("../assets/models/kampung menanti.glb");
+        addModelToAnchor(mindarThree, gltf, 0);
+        let mixer = new THREE.AnimationMixer(gltf.scene);
+        
+        
+
+        //change from default camera to blender camera
+        //overrides instead of plane of object, it is on display device plane
+        //more stable projection
+        const cam = gltf.cameras.length > 0 ? gltf.cameras[0] : mindarThree.camera;
+        cam.position.set(cam.position.x,cam.position.y-3,cam.position.z);
+        //render
+        await mindarThree.start();
+        startRenderingLoop(renderer, scene, cam, mixer, gltf);
+    };
 
     // Begin the AR experience on DOM load
+    start2();
     start();
 });
