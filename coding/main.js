@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //PHONE DRAG MOTION
         document.addEventListener("touchmove", (event) => {
+            event.preventDefault();
             const touch = event.touches[0];
             let x = touch.clientX;
             let y = touch.clientY;
@@ -154,7 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
             //fly after set position
             startAnimation(mixer, gltf, 1);
             
-        },{ passive: false } 
+        },
+{ passive: false } 
         );
         
         //render
