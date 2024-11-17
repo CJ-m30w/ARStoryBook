@@ -99,8 +99,28 @@ document.addEventListener('DOMContentLoaded', () => {
         
         
         
-      // Clicking gesture coding
+      // Mouse clicking gesture coding
     document.addEventListener("click", (event) => {
+      // Get click coordinates
+      const x = event.clientX;
+      const y = event.clientY;
+
+      // Log or display the click coordinates
+        //useful for trigerring specific animation later
+        //bird  hitbox
+        //x 400-480
+        //y 230-380
+      console.log(`Clicked at X: ${x}, Y: ${y}`);
+        //override keyboard input for clicking screen input 
+        //trigger walking animation
+        if(x>=400&&x<=480 &&y>=230 && y<=380){
+         startAnimation(mixer, gltf,2);  
+        }
+      
+    });
+        
+        //Phone tap screen gesture coding
+        document.addEventListener("touchstart", (event) => {
       // Get click coordinates
       const x = event.clientX;
       const y = event.clientY;
