@@ -153,7 +153,9 @@ document.addEventListener("DOMContentLoaded", () => {
              console.log(`Cam now at ${camoriX} and ${camoriY}`);
             //fly after set position
             startAnimation(mixer, gltf, 1);
-        });
+            
+        },{ passive: false } 
+        );
         
         //render
         await mindarThree.start();
