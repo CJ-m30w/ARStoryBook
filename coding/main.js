@@ -113,7 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(`Clicked at X: ${x}, Y: ${y}`);
         //override keyboard input for clicking screen input 
         //trigger walking animation
+        //hitbox works for HD dimension pc
         if(x>=400&&x<=480 &&y>=230 && y<=380){
+              console.log('clicked bird');
          startAnimation(mixer, gltf,2);  
         }
       
@@ -121,20 +123,22 @@ document.addEventListener('DOMContentLoaded', () => {
         
         //Phone tap screen gesture coding
         document.addEventListener("touchstart", (event) => {
-      // Get click coordinates
-      const x = event.clientX;
-      const y = event.clientY;
+      // Get tap coordinates
+       var x = event.touches[0].clientX;
+       var y = event.touches[0].clientY;
 
       // Log or display the click coordinates
         //useful for trigerring specific animation later
         //bird  hitbox
-        //x 400-480
-        //y 230-380
-      console.log(`Clicked at X: ${x}, Y: ${y}`);
+
+      console.log(`Tapped at X: ${x}, Y: ${y}`);
         //override keyboard input for clicking screen input 
         //trigger walking animation
-        if(x>=400&&x<=480 &&y>=230 && y<=380){
-         startAnimation(mixer, gltf,2);  
+        //try trigger where it intersects
+        //assume percentage with diff phone dimensions
+        if(x>=window.innerWidth*0.48&&x<=window.innerWidth*0.68&&y>=window.innerHeight*0.37&&y<=window.innerHeight*0.57){
+         console.log('tapped bird');
+            startAnimation(mixer, gltf,2);  
         }
       
     });
