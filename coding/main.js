@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const initializeMindAR = () => {
         return new window.MINDAR.IMAGE.MindARThree({
             container: document.body,
-            imageTargetSrc: "../assets/target/QRBig2.mind"
+            imageTargetSrc: "../assets/target/birb.mind"
         });
     };
     
